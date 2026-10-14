@@ -1,1 +1,0 @@
-# novaprotector-engine.
