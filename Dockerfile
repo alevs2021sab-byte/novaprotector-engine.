@@ -4,7 +4,10 @@ FROM ubuntu:24.04 AS builder
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    git cmake g++ make \
+    git \
+    cmake \
+    g++ \
+    make \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth 1 \
@@ -23,9 +26,7 @@ ENV PORT=10000
 
 RUN useradd --create-home appuser
 
-COPY --from=builder \
-    /src/luau/build/luau-compile \
-    /usr/local/bin/luau-compile
+COPY --from=builder /src/luau/build/luau-compile /usr/local/bin/luau-compile
 
 WORKDIR /app
 
@@ -35,5 +36,5 @@ USER appuser
 
 EXPOSE 10000
 
-CMD ["python", "/a
-pp/server.py"]
+CMD ["python", "/
+app/server.py"]
